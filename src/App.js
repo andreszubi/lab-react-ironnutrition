@@ -2,7 +2,7 @@ import React from 'react';
 import {v4 as uuidv4} from 'uuid';
 import { useState } from 'react';
 
-import foods from './foods.json';
+import foodsJSON from './foods.json';
 import FoodBox from './components/FoodBox';
 import AddFoodForm from './components/AddFoodForm';
 import './App.css';
@@ -10,11 +10,12 @@ import './App.css';
 import { Row, Divider, Button } from 'antd';
 
 function App() {
-  const [foodList, setFoodList] = useState(foods);
+  const [foodList, setFoodList] = useState(foodsJSON);
+  const uuid = require('uuid');
   
   return (
     <div className="App">
-      {/* Display Add Food component here */}
+      
       <AddFoodForm foodList={foodList} setFoodList={setFoodList} />
     
 
