@@ -1,4 +1,5 @@
-import logo from './logo.svg';
+import { Card, Row, Col, Divider, Input, Button } from 'antd';
+import foods from './foods.json';
 import './App.css';
 
 function App() {
@@ -23,3 +24,5 @@ function App() {
 }
 
 export default App;
+
+{lang === 'en' && <p>English</p>}
