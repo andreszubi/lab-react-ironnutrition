@@ -10,8 +10,15 @@ import './App.css';
 import { Row, Divider, Button } from 'antd';
 
 function App() {
-  const [foodList, setFoodList] = useState(foodsJSON);
-  const uuid = require('uuid');
+  const [foodList, setFoodList] = useState(
+    foodsJSON.map((currentFood) => ({ ...currentFood, tempId: uuidv4() }))
+  );
+
+  const deleteItem = (tempId) => {
+    setFoodList(foodList.filter((food) => food.tempId !== tempId));
+  };
+
+
   
   return (
     <div className="App">
@@ -25,13 +32,11 @@ function App() {
 
       <Divider>Food List</Divider>
 
-      <Row style={{ width: '100%', justifyContent: 'center' }}>
+      <Row gutter={[8, 8]}>
         {/* Render the list of Food Box components here */}
 
         {foodList.map((food) => (
-          <div key={uuidv4()}>
-            <FoodBox food={food} />
-          </div>
+        <FoodBox key={food.tempId} food={food} deleteItem={deleteItem} /> 
         ))}
       </Row>
     </div>

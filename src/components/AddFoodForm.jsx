@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Divider, Input } from 'antd';
+import {v4 as uuidv4} from 'uuid';
 
 //Create a new food form input entry and add it to the list of existing foods array
 
@@ -17,8 +18,9 @@ const AddFoodForm = ({ foodList, setFoodList }) => {
         {
             name: newName,
             image: newImage,
-            newCalories: newCalories,
-            newServings: newServings,
+            calories: newCalories,
+            servings: newServings,
+            tempId: uuidv4(),
           },
         ]);
         setNewName('');
