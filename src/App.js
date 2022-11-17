@@ -6,6 +6,7 @@ import foodsJSON from './foods.json';
 import FoodBox from './components/FoodBox';
 import AddFoodForm from './components/AddFoodForm';
 import './App.css';
+import Search from './components/Search';
 
 import { Row, Divider, Button } from 'antd';
 
@@ -18,6 +19,10 @@ function App() {
     setFoodList(foodList.filter((food) => food.tempId !== tempId));
   };
 
+const [query, setQuery] = useState('');
+
+// hide add food form
+const [showForm, setShowForm] = useState(false);
 
   
   return (
@@ -26,18 +31,26 @@ function App() {
       <AddFoodForm foodList={foodList} setFoodList={setFoodList} />
     
 
-      <Button> Hide Form / Add New Food </Button>
+      <Button onClick={() => setShowForm(!showForm)}>
+        {showForm ? 'Hide' : 'Show'} Form
+      </Button>
+
 
       {/* Display Search component here */}
+      <Search query={query} setQuery={setQuery} />
+
 
       <Divider>Food List</Divider>
 
       <Row gutter={[8, 8]}>
-        {/* Render the list of Food Box components here */}
-
-        {foodList.map((food) => (
-        <FoodBox key={food.tempId} food={food} deleteItem={deleteItem} /> 
-        ))}
+        
+      {foodList
+          .filter((food) =>
+            food.name.toLowerCase().includes(query.toLowerCase())
+          )
+          .map((food) => (
+            <FoodBox key={food.tempId} food={food} deleteItem={deleteItem} />
+          ))}
       </Row>
     </div>
   );
